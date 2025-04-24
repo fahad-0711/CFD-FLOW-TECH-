@@ -1,0 +1,20 @@
+<script>
+  async function analyzeSymptoms() {
+    const symptoms = document.getElementById('symptoms').value;
+
+    const response = await fetch("http://localhost:5000/diagnose", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ symptoms: symptoms })
+    });
+
+    const data = await response.json();
+
+    document.getElementById('diseaseName').textContent = data.disease;
+    document.getElementById('medicines').textContent = data.medicines;
+    document.getElementById('severity').textContent = data.severity;
+    document.getElementById('result').style.display = 'block';
+  }
+</script>
